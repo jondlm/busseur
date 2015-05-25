@@ -1,0 +1,81 @@
+{
+  "resultSet": {
+    "detour": [
+      {
+        "route": [
+          {
+            "route": 35,
+            "detour": true,
+            "type": "B",
+            "desc": "35-Macadam/Greeley"
+          },
+          {
+            "route": 36,
+            "detour": true,
+            "type": "B",
+            "desc": "36-South Shore"
+          }
+        ],
+        "end": 2133766800000,
+        "id": "27589",
+        "begin": 1376301600000,
+        "desc": "No service to southbound SW Macadam & Taylors Ferry (Stop ID 3618) and northbound SW Macadam & Miles (Stop ID 3617) due to the Sellwood Bridge construction. Use stops before or after."
+      }
+    ],
+    "arrival": [
+      {
+        "feet": null,
+        "departed": false,
+        "scheduled": 1418821196000,
+        "shortSign": "35 To Oregon City TC",
+        "detoured": true,
+        "tripID": 5088735,
+        "extraTripID": null,
+        "dir": 0,
+        "blockID": 3502,
+        "detour": [
+          "27589"
+        ],
+        "route": 35,
+        "piece": "1",
+        "fullSign": "35  Macadam/Greeley to Oregon City TC via Portland City Ctr",
+        "id": "3502_17996",
+        "vehicleID": null,
+        "locid": 6376,
+        "status": "scheduled"
+      },
+      {
+        "feet": null,
+        "departed": false,
+        "scheduled": 1418823458000,
+        "shortSign": "35 To Oregon City TC",
+        "detoured": true,
+        "tripID": 5088737,
+        "extraTripID": null,
+        "dir": 0,
+        "blockID": 3504,
+        "detour": [
+          "27589"
+        ],
+        "route": 35,
+        "piece": "1",
+        "fullSign": "35  Macadam/Greeley to Oregon City TC via Portland City Ctr",
+        "id": "3504_20258",
+        "vehicleID": null,
+        "locid": 6376,
+        "status": "scheduled"
+      }
+    ],
+    "queryTime": 1418819225845,
+    "location": [
+      {
+        "lng": -122.717538834735,
+        "passengerCode": "E",
+        "id": 6376,
+        "dir": "Eastbound",
+        "lat": 45.5840303186333,
+        "desc": "N Willis & Druid"
+      }
+    ]
+  }
+}

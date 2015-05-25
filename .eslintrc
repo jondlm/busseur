@@ -1,0 +1,11 @@
+{
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "quotes": [1, "single"],
+    "comma-dangle": true,
+    "no-process-exit": false
+  }
+}
