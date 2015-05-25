@@ -1,4 +1,4 @@
 # Busseur
 
-A TriMet command line tool for bus arrivals
+A small TriMet command line tool for bus arrivals.
 
