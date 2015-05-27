@@ -8,17 +8,17 @@ var packageJson = require(r + 'package.json');
 
 program
 .version(packageJson.version)
-  .option('-l, --locid <n>', 'filter to a specic trmiet locid', coerce.myParseInt)
+  .option('-s, --stop <n>', 'filter to a specic trimet stop id', coerce.myParseInt)
   .option('-r, --route <n>', 'filter to a specific route number', coerce.myParseInt)
   .option('-n, --nickname [nickname]', 'a custom nickname for the location')
   .parse(process.argv);
 
 // Check for required arguments
-if (!program.locid) { console.error('Please provide a valid location id with -l.'); process.exit(1); }
+if (!program.stop) { console.error('Please provide a valid stop id with -s.'); process.exit(1); }
 if (!program.route) { console.error('Please provide a route number with -r.'); process.exit(1); }
 
 main({
-  locid: program.locid,
+  stop: program.stop,
   route: program.route,
   nickname: program.nickname
 });
