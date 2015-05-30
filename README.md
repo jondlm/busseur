@@ -1,6 +1,8 @@
 # Busseur
 
-A small TriMet command line tool for bus arrivals.
+A small TriMet command line tool for bus arrivals. It will automatically
+refresh every minute. It's great for squeezing in those extra few minutes of
+coding.
 
 ![busseur](https://raw.githubusercontent.com/jondlm/busseur/master/img/busseur.gif)
 
@@ -13,9 +15,11 @@ Options:
 
   -h, --help                 output usage information
   -V, --version              output the version number
-  -s, --stop <n>             filter to a specic trimet stop id
-  -r, --route <n>            filter to a specific route number
+  -s, --stop <n>             filter to a specic trimet stop id *
+  -r, --route <n>            filter to a specific route number *
   -n, --nickname [nickname]  a custom nickname for the location
+
+* required
 ```
 
 ## Tests
