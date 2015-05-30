@@ -1,3 +1,5 @@
+/*eslint no-underscore-dangle:0 */
+
 'use strict';
 
 var r = require('__base');
@@ -33,17 +35,16 @@ describe('main cli program', function() {
   afterEach(function () { clockMock.restore(); });
 
   it('should correctly handle no results', function() {
-    var observer = main({ locid: 0, route: 0, nickname: 'dingus' });
+    var observer = main({ stop: 0, route: 0, nickname: 'dingus' });
 
     assert.equal(strip(uMock.log.getCall(0).args[0]), 'dingus refreshed at 16:00');
     assert.equal(strip(uMock.log.getCall(1).args[0]), 'No results found.');
-    assert.equal(uMock.die.called, true);
 
     observer.dispose();
   });
 
   it('should display results with a nickname', function() {
-    var observer = main({ locid: 6376, route: 35, nickname: 'grrggl' });
+    var observer = main({ stop: 6376, route: 35, nickname: 'grrggl' });
 
     assert.equal(strip(uMock.log.getCall(0).args[0]), 'grrggl refreshed at 16:00');
     assert.equal(strip(uMock.log.getCall(1).args[0]), '  Arriving %s at %s');
@@ -53,7 +54,7 @@ describe('main cli program', function() {
   });
 
   it('should display results without a nickname', function() {
-    var observer = main({ locid: 6376, route: 35 });
+    var observer = main({ stop: 6376, route: 35 });
 
     assert.equal(strip(uMock.log.getCall(0).args[0]), '6376 refreshed at 16:00');
     assert.equal(strip(uMock.log.getCall(1).args[0]), '  Arriving %s at %s');

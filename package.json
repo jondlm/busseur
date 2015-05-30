@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "A trimet CLI tool",
   "main": "index.js",
-  "repository": "jondlm/rx-koans-cli",
+  "repository": "jondlm/busseur-server",
+  "bugs": {
+    "url": "https://github.com/jondlm/busseur-server/issues"
+  },
   "dependencies": {
     "colors": "^1.0.3",
     "commander": "^2.5.0",
