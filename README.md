@@ -2,6 +2,8 @@
 
 A small TriMet command line tool for bus arrivals.
 
+![busseur](https://raw.githubusercontent.com/jondlm/busseur/master/img/busseur.png)
+
 ## Usage
 
 ```text
