@@ -8,6 +8,10 @@ coding.
 
 ## Usage
 
+```
+npm install -g busseur
+```
+
 ```text
 busseur [options]
 
