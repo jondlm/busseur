@@ -1,16 +1,20 @@
 # Busseur
 
+```
+npm install -g busseur
+```
+
 A small TriMet command line tool for bus arrivals. It will automatically
 refresh every minute. It's great for squeezing in those extra few minutes of
 coding.
 
+Also, it's written with RxJs so it's declarative. It's kind of like React,
+every time your state changes, it throws away everything on the screen and
+repaints (minus the diffing).
+
 ![busseur](https://raw.githubusercontent.com/jondlm/busseur/master/img/busseur.gif)
 
 ## Usage
-
-```
-npm install -g busseur
-```
 
 ```text
 busseur [options]
