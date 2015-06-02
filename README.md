@@ -23,11 +23,12 @@ Options:
 
   -h, --help                 output usage information
   -V, --version              output the version number
-  -s, --stop <n>             filter to a specic trimet stop id *
-  -r, --route <n>            filter to a specific route number *
+  -s, --stop <n>             filter to a specic TriMet stop id (required)
+  -r, --route [n]            filter to a specific set of routes (repeatable)
   -n, --nickname [nickname]  a custom nickname for the location
+  -t, --threshold [minutes]  number of minutes for the notification threshold (0 >= t >= 30)
+  --disable-notifications    turn off notifications
 
-* required
 ```
 
 ## Tests
@@ -39,7 +40,7 @@ npm test
 
 ## Busseur server
 
-Trimet only allows access to their api with a token obtained on their developer
+TriMet only allows access to their api with a token obtained on their developer
 website. If you want to run your own server with your own api key, check out
 the [busseur-server] repo.
 

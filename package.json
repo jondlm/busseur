@@ -1,7 +1,7 @@
 {
   "name": "busseur",
   "version": "0.0.2",
-  "description": "A trimet CLI tool",
+  "description": "A TriMet CLI tool",
   "main": "index.js",
   "repository": "jondlm/busseur-server",
   "bugs": {

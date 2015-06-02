@@ -64,6 +64,16 @@
         "vehicleID": null,
         "locid": 6376,
         "status": "scheduled"
+      },
+      {
+        "scheduled": 1418823458000,
+        "shortSign": "77 To Capetown",
+        "route": 77
+      },
+      {
+        "scheduled": 1418823458000,
+        "shortSign": "99 To Georgetown",
+        "route": 99
       }
     ],
     "queryTime": 1418819225845,
