@@ -11,11 +11,14 @@ program
   .option('-s, --stop <n>', 'filter to a specic trimet stop id', coerce.myParseInt)
   .option('-r, --route <n>', 'filter to a specific route number', coerce.myParseInt)
   .option('-n, --nickname [nickname]', 'a custom nickname for the location')
+  .option('-t, --threshold <mins>', 'number of minutes for the notification threshold', coerce.myParseInt, 5)
+  .option('--disable-notifications', 'turn off notifications')
   .parse(process.argv);
 
-// Check for required arguments
+// Perform validations
 if (!program.stop) { console.error('Please provide a valid stop id with -s.'); process.exit(1); }
 if (!program.route) { console.error('Please provide a route number with -r.'); process.exit(1); }
+if (program.threshold > 30 || program.threshold < 0) { console.error('Threshold must be between 0 and 30 inclusive'); }
 
 main({
   stop: program.stop,

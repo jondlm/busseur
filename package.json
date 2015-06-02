@@ -10,7 +10,9 @@
   "dependencies": {
     "colors": "^1.0.3",
     "commander": "^2.5.0",
+    "lodash": "^3.9.3",
     "moment": "^2.8.4",
+    "node-notifier": "^4.2.1",
     "rx": "^2.3.20"
   },
   "devDependencies": {

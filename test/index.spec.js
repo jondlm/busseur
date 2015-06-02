@@ -16,7 +16,6 @@ var getJsonMock = function() { return Rx.Observable.just(fixture); };
 var uMock;
 var clockMock;
 
-
 describe('main cli program', function() {
   beforeEach(function () {
     clockMock = sinon.useFakeTimers();
@@ -39,6 +38,7 @@ describe('main cli program', function() {
 
     assert.equal(strip(uMock.log.getCall(0).args[0]), 'dingus refreshed at 16:00');
     assert.equal(strip(uMock.log.getCall(1).args[0]), 'No results found.');
+    assert.equal(uMock.die.called, true);
 
     observer.dispose();
   });
