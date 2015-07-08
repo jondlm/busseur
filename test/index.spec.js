@@ -49,9 +49,11 @@ describe('main cli program', function() {
     var observer = main({ stop: 6376, route: [35], nickname: 'grrggl' });
 
     assert.equal(strip(uMock.log.getCall(0).args[0]), 'grrggl refreshed at 16:00');
-    assert.equal(strip(uMock.log.getCall(1).args[0]), '  #%s arriving %s at %s');
+    assert.equal(strip(uMock.log.getCall(1).args[0]), '  #%s arriving %s at %s (%s)');
     assert.equal(strip(uMock.log.getCall(1).args[1]), '35');
     assert.equal(strip(uMock.log.getCall(1).args[2]), 'in 45 years');
+    assert.equal(strip(uMock.log.getCall(1).args[3]), '04:59');
+    assert.equal(strip(uMock.log.getCall(1).args[4]), 'on time');
 
     observer.dispose();
   });
@@ -60,9 +62,11 @@ describe('main cli program', function() {
     var observer = main({ stop: 6376, route: [35] });
 
     assert.equal(strip(uMock.log.getCall(0).args[0]), '6376 refreshed at 16:00');
-    assert.equal(strip(uMock.log.getCall(1).args[0]), '  #%s arriving %s at %s');
+    assert.equal(strip(uMock.log.getCall(1).args[0]), '  #%s arriving %s at %s (%s)');
     assert.equal(strip(uMock.log.getCall(1).args[1]), '35');
     assert.equal(strip(uMock.log.getCall(1).args[2]), 'in 45 years');
+    assert.equal(strip(uMock.log.getCall(1).args[3]), '04:59');
+    assert.equal(strip(uMock.log.getCall(1).args[4]), 'on time');
 
     observer.dispose();
   });
