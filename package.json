@@ -12,7 +12,7 @@
     "commander": "^2.5.0",
     "lodash": "^3.9.3",
     "moment": "^2.8.4",
-    "node-notifier": "^4.2.1",
+    "node-notifier": "^5.0.0",
     "rx": "^2.3.20",
     "rx-http": "0.0.3"
   },
