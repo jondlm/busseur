@@ -1,111 +1,89 @@
-/*eslint no-underscore-dangle:0 */
+jest.mock('rx-http');
+jest.mock('../lib/utility');
+jest.useFakeTimers();
+Date.now = jest.fn(() => 0);
 
-'use strict';
-
-var r = require('__base');
-var Rx = require('rx');
-var sinon = require('sinon');
+var Rx = require('rxjs');
 var strip = require('colors').stripColors;
-var rewire = require('rewire');
 var assert = require('assert');
-var fixture = require(r + 'test/fixtures/arrivals.json');
+var fixture = require('./fixtures/arrivals.json');
+var rxHttp = require('rx-http');
+var u = require('../lib/utility');
 
-var main = rewire(r + 'lib/main');
+var main = require('../lib/main');
 
-var getJsonMock = function() { return Rx.Observable.just(fixture); };
+var getJsonMock = function() { return Rx.Observable.of(fixture); };
 var uMock;
-var clockMock;
 
 describe('main cli program', function() {
   beforeEach(function () {
-    clockMock = sinon.useFakeTimers();
     uMock = {
-      log: sinon.spy(),
-      write: sinon.spy(),
-      die: sinon.spy(),
-      notify: sinon.spy()
+      log: jest.fn(),
+      write: jest.fn(),
+      die: jest.fn(),
     };
 
-    main.__set__('rxHttp.getJson$', getJsonMock);
-    main.__set__('u.log', uMock.log);
-    main.__set__('u.write', uMock.write);
-    main.__set__('u.die', uMock.die);
-    main.__set__('notifier.notify', uMock.notify);
+    rxHttp.getJson$.mockImplementation(getJsonMock);
+    u.log.mockImplementation(uMock.log);
+    u.write.mockImplementation(uMock.write);
+    u.die.mockImplementation(uMock.die);
   });
-
-  afterEach(function () { clockMock.restore(); });
 
   it('should correctly handle no results', function() {
     var observer = main({ stop: 0, route: [0], nickname: 'dingus' });
 
-    assert.equal(strip(uMock.log.getCall(0).args[0]), 'dingus refreshed at 16:00');
-    assert.equal(strip(uMock.log.getCall(1).args[0]), 'No results found.');
-    assert.equal(uMock.die.called, true);
+    assert.equal(strip(uMock.log.mock.calls[0][0]), 'dingus refreshed at 16:00');
+    assert.equal(strip(uMock.log.mock.calls[1][0]), 'No results found.');
+    assert(uMock.die.mock.calls.length > 0);
 
-    observer.dispose();
+    observer.unsubscribe();
   });
 
   it('should display results with a nickname', function() {
     var observer = main({ stop: 6376, route: [35], nickname: 'grrggl' });
 
-    assert.equal(strip(uMock.log.getCall(0).args[0]), 'grrggl refreshed at 16:00');
-    assert.equal(strip(uMock.log.getCall(1).args[0]), '  #%s arriving %s at %s (%s)');
-    assert.equal(strip(uMock.log.getCall(1).args[1]), '35');
-    assert.equal(strip(uMock.log.getCall(1).args[2]), 'in 45 years');
-    assert.equal(strip(uMock.log.getCall(1).args[3]), '04:59');
-    assert.equal(strip(uMock.log.getCall(1).args[4]), 'on time');
+    assert.equal(strip(uMock.log.mock.calls[0][0]), 'grrggl refreshed at 16:00');
+    assert.equal(strip(uMock.log.mock.calls[1][0]), '  #%s arriving %s at %s (%s)');
+    assert.equal(strip(uMock.log.mock.calls[1][1]), '35');
+    assert.equal(strip(uMock.log.mock.calls[1][2]), 'in 45 years');
+    assert.equal(strip(uMock.log.mock.calls[1][3]), '04:59');
+    assert.equal(strip(uMock.log.mock.calls[1][4]), 'on time');
 
-    observer.dispose();
+    observer.unsubscribe();
   });
 
   it('should display results without a nickname', function() {
     var observer = main({ stop: 6376, route: [35] });
 
-    assert.equal(strip(uMock.log.getCall(0).args[0]), '6376 refreshed at 16:00');
-    assert.equal(strip(uMock.log.getCall(1).args[0]), '  #%s arriving %s at %s (%s)');
-    assert.equal(strip(uMock.log.getCall(1).args[1]), '35');
-    assert.equal(strip(uMock.log.getCall(1).args[2]), 'in 45 years');
-    assert.equal(strip(uMock.log.getCall(1).args[3]), '04:59');
-    assert.equal(strip(uMock.log.getCall(1).args[4]), 'on time');
+    assert.equal(strip(uMock.log.mock.calls[0][0]), '6376 refreshed at 16:00');
+    assert.equal(strip(uMock.log.mock.calls[1][0]), '  #%s arriving %s at %s (%s)');
+    assert.equal(strip(uMock.log.mock.calls[1][1]), '35');
+    assert.equal(strip(uMock.log.mock.calls[1][2]), 'in 45 years');
+    assert.equal(strip(uMock.log.mock.calls[1][3]), '04:59');
+    assert.equal(strip(uMock.log.mock.calls[1][4]), 'on time');
 
-    observer.dispose();
+    observer.unsubscribe();
   });
 
   it('should handle multiple routes', function() {
     var observer = main({ stop: 6376, route: [35, 77] });
 
-    assert.equal(strip(uMock.log.getCall(1).args[1]), '35');
-    assert.equal(strip(uMock.log.getCall(2).args[1]), '35');
-    assert.equal(strip(uMock.log.getCall(3).args[1]), '77');
+    assert.equal(strip(uMock.log.mock.calls[1][1]), '35');
+    assert.equal(strip(uMock.log.mock.calls[2][1]), '35');
+    assert.equal(strip(uMock.log.mock.calls[3][1]), '77');
 
-    observer.dispose();
+    observer.unsubscribe();
   });
 
   it('should handle no routes', function() {
     var observer = main({ stop: 6376, route: [] });
 
-    assert.equal(strip(uMock.log.getCall(1).args[1]), '35');
-    assert.equal(strip(uMock.log.getCall(2).args[1]), '35');
-    assert.equal(strip(uMock.log.getCall(3).args[1]), '77');
-    assert.equal(strip(uMock.log.getCall(4).args[1]), '99');
+    assert.equal(strip(uMock.log.mock.calls[1][1]), '35');
+    assert.equal(strip(uMock.log.mock.calls[2][1]), '35');
+    assert.equal(strip(uMock.log.mock.calls[3][1]), '77');
+    assert.equal(strip(uMock.log.mock.calls[4][1]), '99');
 
-    observer.dispose();
-  });
-
-  it('should notify when threshold is high enough', function() {
-    var observer = main({ stop: 6376, route: [], threshold: 999999999 });
-
-    assert.equal(uMock.notify.called, true);
-
-    observer.dispose();
-  });
-
-  it('should not notify when threshold is low', function() {
-    var observer = main({ stop: 6376, route: [], threshold: 1 });
-
-    assert.equal(uMock.notify.called, false);
-
-    observer.dispose();
+    observer.unsubscribe();
   });
 });
 
