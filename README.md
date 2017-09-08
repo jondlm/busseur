@@ -26,8 +26,6 @@ Options:
   -s, --stop <n>             filter to a specic TriMet stop id (required)
   -r, --route [n]            filter to a specific set of routes (repeatable)
   -n, --nickname [nickname]  a custom nickname for the location
-  -t, --threshold [minutes]  number of minutes for the notification threshold (0 >= t >= 30)
-  --disable-notifications    turn off notifications
 
 ```
 
